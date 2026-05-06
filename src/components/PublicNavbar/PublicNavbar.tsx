@@ -1,8 +1,8 @@
+import { UserRound } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import type { FC } from 'react';
-import { Link } from 'react-router-dom';
-import { UserRound } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import defaultLogo from '../../assets/logo_telepathie.png';
 import { clearAuthUser, getAuthUser } from '../../utils/auth';
 import styles from './PublicNavbar.module.css';
 
@@ -64,16 +64,17 @@ const PublicNavbar: FC<PublicNavbarProps> = ({
   const userDisplayName = authUser
     ? `${authUser.firstName} ${authUser.lastName.toUpperCase()}`
     : '';
+  const resolvedLogoSrc = logoSrc ?? defaultLogo;
 
   return (
     <header className={styles.header}>
       <nav className={styles.nav} aria-label="Navigation principale">
         <Link to="/" className={styles.brand}>
           <span className={styles.logoBox} aria-hidden="true">
-            {logoSrc ? (
+            {resolvedLogoSrc ? (
               <img
-                src={logoSrc}
-                alt="Logo Télépathie"
+                src={resolvedLogoSrc}
+                alt="Logo Telepathie"
                 className={styles.logoImage}
               />
             ) : (
@@ -110,7 +111,7 @@ const PublicNavbar: FC<PublicNavbarProps> = ({
                   className={styles.dropdownItem}
                   onClick={handleLogout}
                 >
-                  Se déconnecter
+                  Se deconnecter
                 </button>
               </div>
             )}

@@ -20,22 +20,21 @@
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   color: #05066d;
   text-decoration: none;
   min-width: 0;
 }
 
 .logoBox {
-  width: 44px;
   height: 44px;
   flex: 0 0 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  border: 1px solid rgba(5, 6, 109, 0.16);
-  background: rgba(5, 6, 109, 0.05);
+  border: none;
+  background: transparent;
   overflow: hidden;
   box-sizing: border-box;
 }

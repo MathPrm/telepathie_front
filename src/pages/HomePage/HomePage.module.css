@@ -3,6 +3,7 @@
   background: #b0c5ff;
   text-align: left;
   position: relative;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
 }
@@ -42,6 +43,7 @@
   box-sizing: border-box;
   position: relative;
   z-index: 1;
+  overflow-x: clip;
 }
 
 .hero {
