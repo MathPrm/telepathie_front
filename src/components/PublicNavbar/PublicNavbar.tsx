@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import defaultLogo from '../../assets/logo_telepathie.png';
-import { clearAuthUser, getAuthUser } from '../../utils/auth';
+import { AUTH_CHANGED_EVENT, clearAuthUser, getAuthUser } from '../../utils/auth';
 import styles from './PublicNavbar.module.css';
 
 interface PublicNavbarProps {
@@ -27,12 +27,16 @@ const PublicNavbar: FC<PublicNavbarProps> = ({
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const onStorageChange = (): void => {
+    const refreshAuthUser = (): void => {
       setAuthUser(getAuthUser());
     };
 
-    window.addEventListener('storage', onStorageChange);
-    return () => window.removeEventListener('storage', onStorageChange);
+    window.addEventListener('storage', refreshAuthUser);
+    window.addEventListener(AUTH_CHANGED_EVENT, refreshAuthUser);
+    return () => {
+      window.removeEventListener('storage', refreshAuthUser);
+      window.removeEventListener(AUTH_CHANGED_EVENT, refreshAuthUser);
+    };
   }, []);
 
   useEffect(() => {
@@ -111,7 +115,7 @@ const PublicNavbar: FC<PublicNavbarProps> = ({
                   className={styles.dropdownItem}
                   onClick={handleLogout}
                 >
-                  Se deconnecter
+                  Déconnexion
                 </button>
               </div>
             )}

@@ -8,6 +8,7 @@ export interface AuthUser {
 }
 
 const AUTH_USER_KEY = 'telepathie_user';
+export const AUTH_CHANGED_EVENT = 'auth-changed';
 
 export const getAuthUser = (): AuthUser | null => {
   const raw = localStorage.getItem(AUTH_USER_KEY);
@@ -17,9 +18,15 @@ export const getAuthUser = (): AuthUser | null => {
 
   try {
     const parsed = JSON.parse(raw) as Partial<AuthUser>;
+    const normalizedId =
+      typeof parsed.id === 'number'
+        ? parsed.id
+        : typeof parsed.id === 'string'
+          ? Number(parsed.id)
+          : NaN;
 
     if (
-      typeof parsed.id !== 'number' ||
+      !Number.isFinite(normalizedId) ||
       typeof parsed.firstName !== 'string' ||
       typeof parsed.lastName !== 'string' ||
       typeof parsed.email !== 'string' ||
@@ -30,7 +37,7 @@ export const getAuthUser = (): AuthUser | null => {
     }
 
     return {
-      id: parsed.id,
+      id: normalizedId,
       firstName: parsed.firstName,
       lastName: parsed.lastName,
       email: parsed.email,
@@ -45,8 +52,10 @@ export const getAuthUser = (): AuthUser | null => {
 
 export const setAuthUser = (user: AuthUser): void => {
   localStorage.setItem(AUTH_USER_KEY, JSON.stringify(user));
+  window.dispatchEvent(new Event(AUTH_CHANGED_EVENT));
 };
 
 export const clearAuthUser = (): void => {
   localStorage.removeItem(AUTH_USER_KEY);
+  window.dispatchEvent(new Event(AUTH_CHANGED_EVENT));
 };
