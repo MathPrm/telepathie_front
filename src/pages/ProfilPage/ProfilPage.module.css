@@ -43,7 +43,7 @@
 
 .card {
   width: 100%;
-  max-width: 500px;
+  max-width: 980px;
   border-radius: 22px;
   background: rgba(255, 255, 255, 0.94);
   border: 1px solid rgba(5, 6, 109, 0.14);
@@ -64,4 +64,256 @@
   margin: 10px 0 0;
   color: #05066d;
   font-size: 1rem;
+}
+
+.practitionerSection {
+  margin-top: 24px;
+  border-top: 1px solid rgba(5, 6, 109, 0.15);
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sectionTitle {
+  margin: 0;
+  color: #05066d;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #05066d;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid rgba(5, 6, 109, 0.28);
+  background: #ffffff;
+  color: #05066d;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #05066d;
+  box-shadow: 0 0 0 4px rgba(5, 6, 109, 0.14);
+}
+
+.subSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.subSectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.subTitle {
+  margin: 0;
+  margin-top: 20px;
+  color: #05066d;
+  font-size: 1.12rem;
+  font-weight: 800;
+}
+
+.addButton,
+.removeButton,
+.saveButton {
+  border: 1px solid #05066d;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #05066d;
+  padding: 9px 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.addButton {
+  margin-top: 20px;
+}
+
+.removeIconButton {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #05066d;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #05066d;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.saveButton {
+  width: fit-content;
+  background: #05066d;
+  color: #ffffff;
+  padding: 12px 18px;
+  align-self: flex-end;
+}
+
+.addButton:hover,
+.removeButton:hover,
+.removeIconButton:hover,
+.saveButton:hover {
+  opacity: 0.92;
+}
+
+.appointmentList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.appointmentRow {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 90px 50px auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.durationInput {
+  border: 1px solid rgba(5, 6, 109, 0.28);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  background: #ffffff;
+  color: #05066d;
+  color-scheme: light;
+}
+
+.durationInput:focus {
+  border-color: #05066d;
+  box-shadow: 0 0 0 4px rgba(5, 6, 109, 0.14);
+}
+
+.durationInput::-webkit-outer-spin-button,
+.durationInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.minutesLabel {
+  color: #05066d;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  border: 1px solid rgba(5, 6, 109, 0.16);
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+.scheduleTable {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+
+.scheduleTable th,
+.scheduleTable td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(5, 6, 109, 0.09);
+  color: #05066d;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.scheduleTable th {
+  font-weight: 800;
+  background: rgba(90, 140, 242, 0.12);
+}
+
+.scheduleTable th:first-child,
+.scheduleTable td:first-child {
+  text-align: left;
+}
+
+.scheduleTable td input[type='time'] {
+  border: 1px solid rgba(5, 6, 109, 0.24);
+  border-radius: 8px;
+  padding: 6px 8px;
+  color: #05066d;
+  background: #ffffff;
+  display: block;
+  margin: 0 auto;
+}
+
+.scheduleTable td input[type='time']:disabled {
+  opacity: 0.5;
+}
+
+.scheduleTable td input[type='checkbox'] {
+  display: block;
+  margin: 0 auto;
+}
+
+.infoText,
+.errorText,
+.successText {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.infoText {
+  color: #05066d;
+}
+
+.errorText {
+  color: #a61b1b;
+}
+
+.successText {
+  color: #0f7a31;
+}
+
+.saveButton:disabled,
+.removeButton:disabled,
+.removeIconButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+@media (max-width: 720px) {
+  .main {
+    padding: 16px;
+  }
+
+  .card {
+    padding: 20px 16px;
+  }
+
+  .appointmentRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .minutesLabel {
+    margin-top: -4px;
+  }
+
+  .removeButton {
+    width: fit-content;
+  }
 }
