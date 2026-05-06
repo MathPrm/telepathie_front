@@ -1,0 +1,67 @@
+.page {
+  min-height: 100svh;
+  background: #b0c5ff;
+  position: relative;
+  overflow: hidden;
+}
+
+.page::before,
+.page::after {
+  content: '';
+  position: absolute;
+  left: -12%;
+  width: 124%;
+  background: #5a8cf2;
+  opacity: 0.35;
+  border-radius: 50% 50% 0 0;
+  pointer-events: none;
+}
+
+.page::before {
+  bottom: -170px;
+  height: 330px;
+  transform: rotate(-2deg);
+}
+
+.page::after {
+  bottom: -250px;
+  height: 430px;
+  opacity: 0.28;
+  transform: rotate(1.5deg);
+}
+
+.main {
+  min-height: calc(100svh - 69px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 26px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(5, 6, 109, 0.14);
+  box-shadow: 0 22px 42px rgba(5, 6, 109, 0.18);
+  padding: 28px;
+  box-sizing: border-box;
+}
+
+.title {
+  margin: 0 0 16px;
+  color: #05066d;
+  font-size: clamp(2rem, 4.3vw, 2.4rem);
+  line-height: 1.05;
+  font-weight: 800;
+}
+
+.line {
+  margin: 10px 0 0;
+  color: #05066d;
+  font-size: 1rem;
+}

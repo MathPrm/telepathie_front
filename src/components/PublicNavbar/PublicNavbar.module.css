@@ -123,6 +123,70 @@
   outline-offset: 2px;
 }
 
+.userMenu {
+  position: relative;
+}
+
+.userButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #05066d;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #05066d;
+  padding: 10px 14px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.userButton:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.userButton:focus-visible {
+  outline: 3px solid rgba(5, 6, 109, 0.22);
+  outline-offset: 2px;
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 180px;
+  border: 1px solid rgba(5, 6, 109, 0.15);
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 16px 34px rgba(5, 6, 109, 0.16);
+  padding: 6px;
+  z-index: 20;
+}
+
+.dropdownItem {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #05066d;
+  border-radius: 8px;
+  text-align: left;
+  padding: 10px 11px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background: rgba(5, 6, 109, 0.08);
+}
+
+.dropdownItem:focus-visible {
+  outline: 2px solid rgba(5, 6, 109, 0.25);
+  outline-offset: -1px;
+}
+
 @media (max-width: 640px) {
   .nav {
     padding: 16px;
@@ -144,6 +208,11 @@
 
   .actions {
     gap: 8px;
+  }
+
+  .userButton {
+    padding: 10px 12px;
+    font-size: 0.85rem;
   }
 
   .signupButton,
