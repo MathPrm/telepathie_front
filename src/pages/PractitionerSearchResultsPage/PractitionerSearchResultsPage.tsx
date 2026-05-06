@@ -109,7 +109,15 @@ const PractitionerSearchResultsPage = () => {
                     )}
                   </div>
 
-                  <button type="button" className={styles.availabilityButton}>
+                  <button
+                    type="button"
+                    className={styles.availabilityButton}
+                    onClick={() =>
+                      navigate(
+                        `/praticiens/${practitioner.id}?q=${encodeURIComponent(query)}`,
+                      )
+                    }
+                  >
                     Voir les disponibilites
                   </button>
                 </article>

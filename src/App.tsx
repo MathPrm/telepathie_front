@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import InscriptionPage from './pages/InscriptionPage';
 import PraticienConnexionPage from './pages/PraticienConnexionPage';
 import PraticienInscriptionPage from './pages/PraticienInscriptionPage';
+import PractitionerPublicPage from './pages/PractitionerPublicPage';
 import PractitionerSearchPage from './pages/PractitionerSearchPage';
 import PractitionerSearchResultsPage from './pages/PractitionerSearchResultsPage';
 import ProfilPage from './pages/ProfilPage';
@@ -20,6 +21,7 @@ function App() {
           path="/praticiens/resultats"
           element={<PractitionerSearchResultsPage />}
         />
+        <Route path="/praticiens/:practitionerId" element={<PractitionerPublicPage />} />
         <Route
           path="/praticiens/connexion"
           element={<PraticienConnexionPage />}
