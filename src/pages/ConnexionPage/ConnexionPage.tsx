@@ -1,15 +1,65 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PublicNavbar from '../../components/PublicNavbar';
+import { setAuthUser } from '../../utils/auth';
 import styles from './ConnexionPage.module.css';
 
 const ConnexionPage = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    setErrorMessage('');
+    setSuccessMessage('');
+    setIsSubmitting(true);
+
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiUrl}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const payload = (await response.json().catch(() => null)) as
+        | {
+            message?: string;
+            user?: {
+              id: number;
+              firstName: string;
+              lastName: string;
+              email: string;
+              createdAt: string;
+            };
+          }
+        | null;
+
+      if (!response.ok) {
+        setErrorMessage(payload?.message || 'Identifiants invalides.');
+        return;
+      }
+
+      setSuccessMessage(payload?.message || 'Connexion reussie.');
+      if (payload?.user) {
+        setAuthUser(payload.user);
+      }
+      navigate('/');
+    } catch (error) {
+      console.error('Erreur reseau pendant la connexion:', error);
+      setErrorMessage('Impossible de joindre le serveur.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -64,8 +114,17 @@ const ConnexionPage = () => {
               <span className={styles.checkText}>Afficher le mot de passe</span>
             </label>
 
-            <button type="submit" className={styles.submitButton}>
-              Se connecter
+            {errorMessage && <p className={styles.errorText}>{errorMessage}</p>}
+            {successMessage && (
+              <p className={styles.successText}>{successMessage}</p>
+            )}
+
+            <button
+              type="submit"
+              className={styles.submitButton}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Connexion...' : 'Se connecter'}
             </button>
           </form>
         </section>

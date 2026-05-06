@@ -1,20 +1,84 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PublicNavbar from '../../components/PublicNavbar';
 import styles from './InscriptionPage.module.css';
 
 const InscriptionPage = () => {
+  const navigate = useNavigate();
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPasswords, setShowPasswords] = useState(false);
+  const [acceptTerms, setAcceptTerms] = useState(false);
   const [passwordMismatch, setPasswordMismatch] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setPasswordMismatch(password !== confirmPassword);
+
+    const mismatch = password !== confirmPassword;
+    setPasswordMismatch(mismatch);
+    setErrorMessage('');
+    setSuccessMessage('');
+
+    if (mismatch) {
+      return;
+    }
+
+    if (!acceptTerms) {
+      setErrorMessage("Vous devez accepter les conditions d'utilisation.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiUrl}/api/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          password,
+          confirmPassword,
+          acceptTerms,
+        }),
+      });
+
+      const payload = (await response.json().catch(() => null)) as
+        | { message?: string }
+        | null;
+
+      if (!response.ok) {
+        setErrorMessage(payload?.message || "Erreur pendant l'inscription.");
+        return;
+      }
+
+      setSuccessMessage(payload?.message || 'Inscription reussie.');
+      setLastName('');
+      setFirstName('');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+      setShowPasswords(false);
+      setAcceptTerms(false);
+      setPasswordMismatch(false);
+      navigate('/connexion');
+    } catch (error) {
+      console.error("Erreur reseau pendant l'inscription:", error);
+      setErrorMessage('Impossible de joindre le serveur.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -105,6 +169,10 @@ const InscriptionPage = () => {
                 Les mots de passe ne correspondent pas.
               </p>
             )}
+            {errorMessage && <p className={styles.errorText}>{errorMessage}</p>}
+            {successMessage && (
+              <p className={styles.successText}>{successMessage}</p>
+            )}
 
             <label className={styles.checkLabel}>
               <input
@@ -120,15 +188,25 @@ const InscriptionPage = () => {
             </label>
 
             <label className={styles.checkLabel}>
-              <input type="checkbox" className={styles.checkInput} required />
+              <input
+                type="checkbox"
+                className={styles.checkInput}
+                checked={acceptTerms}
+                onChange={(event) => setAcceptTerms(event.target.checked)}
+                required
+              />
               <span className={styles.checkMark} aria-hidden="true" />
               <span className={styles.checkText}>
                 J&apos;accepte les conditions d&apos;utilisation
               </span>
             </label>
 
-            <button type="submit" className={styles.submitButton}>
-              M&apos;inscrire
+            <button
+              type="submit"
+              className={styles.submitButton}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Inscription...' : "M'inscrire"}
             </button>
           </form>
         </section>

@@ -165,6 +165,20 @@
   font-weight: 600;
 }
 
+.errorText {
+  margin: 0;
+  color: #a61b1b;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.successText {
+  margin: 0;
+  color: #0f7a31;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
 .submitButton {
   margin-top: 6px;
   border: 1px solid #05066d;
@@ -187,6 +201,12 @@
 .submitButton:focus-visible {
   outline: 3px solid rgba(5, 6, 109, 0.25);
   outline-offset: 2px;
+}
+
+.submitButton:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+  transform: none;
 }
 
 @media (max-width: 640px) {

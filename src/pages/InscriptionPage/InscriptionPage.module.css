@@ -118,6 +118,13 @@
   font-weight: 600;
 }
 
+.successText {
+  margin: 0;
+  color: #0f7a31;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
 .checkLabel {
   margin-top: 2px;
   display: inline-flex;
@@ -200,6 +207,12 @@
 .submitButton:focus-visible {
   outline: 3px solid rgba(5, 6, 109, 0.25);
   outline-offset: 2px;
+}
+
+.submitButton:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+  transform: none;
 }
 
 @media (max-width: 640px) {
