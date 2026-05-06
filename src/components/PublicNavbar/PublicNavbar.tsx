@@ -96,6 +96,12 @@ const PublicNavbar: FC<PublicNavbarProps> = ({
                 Mes RDV
               </Link>
             )}
+            {authUser.role === 'practitioner' && (
+              <Link to="/praticiens/calendrier" className={styles.appointmentsLink}>
+                <CalendarDays size={16} />
+                Calendrier
+              </Link>
+            )}
 
             <div className={styles.userMenu} ref={menuRef}>
               <button

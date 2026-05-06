@@ -3,6 +3,7 @@ import ConnexionPage from './pages/ConnexionPage';
 import HomePage from './pages/HomePage';
 import InscriptionPage from './pages/InscriptionPage';
 import MesRendezVousPage from './pages/MesRendezVousPage';
+import PraticienCalendrierPage from './pages/PraticienCalendrierPage';
 import PraticienConnexionPage from './pages/PraticienConnexionPage';
 import PraticienInscriptionPage from './pages/PraticienInscriptionPage';
 import PractitionerPublicPage from './pages/PractitionerPublicPage';
@@ -18,6 +19,7 @@ function App() {
         <Route path="/connexion" element={<ConnexionPage />} />
         <Route path="/inscription" element={<InscriptionPage />} />
         <Route path="/mes-rendez-vous" element={<MesRendezVousPage />} />
+        <Route path="/praticiens/calendrier" element={<PraticienCalendrierPage />} />
         <Route path="/praticiens/recherche" element={<PractitionerSearchPage />} />
         <Route
           path="/praticiens/resultats"

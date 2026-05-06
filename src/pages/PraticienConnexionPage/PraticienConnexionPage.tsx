@@ -59,7 +59,7 @@ const PraticienConnexionPage = () => {
       if (payload?.user) {
         setAuthUser(payload.user);
       }
-      navigate('/');
+      navigate('/praticiens/calendrier');
     } catch (error) {
       console.error('Erreur réseau pendant la connexion praticien:', error);
       setErrorMessage('Impossible de joindre le serveur.');

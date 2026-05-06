@@ -53,6 +53,10 @@ const ConnexionPage = () => {
       setSuccessMessage(payload?.message || 'Connexion reussie.');
       if (payload?.user) {
         setAuthUser(payload.user);
+        if (payload.user.role === 'practitioner') {
+          navigate('/praticiens/calendrier');
+          return;
+        }
       }
       navigate('/');
     } catch (error) {
