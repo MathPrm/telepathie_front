@@ -18,7 +18,7 @@ const PractitionerSearchPage = () => {
         <section className={styles.hero}>
           <h1 className={styles.title}>Trouver un praticien</h1>
           <p className={styles.subtitle}>
-            Recherchez par nom, prenom ou specialite.
+            Recherchez le spécialiste qui vous conviendra.
           </p>
           <div className={styles.searchBox}>
             <PractitionerSearchBar onSearch={handleSearch} />

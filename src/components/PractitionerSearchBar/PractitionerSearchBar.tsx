@@ -28,7 +28,7 @@ const PractitionerSearchBar = ({
       <input
         type="search"
         className={styles.input}
-        placeholder="Nom, prenom ou specialite"
+        placeholder="Nom, prénom, spécialité..."
         value={query}
         onChange={(event) => setQuery(event.target.value)}
       />

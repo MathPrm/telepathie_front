@@ -265,8 +265,8 @@ const MesRendezVousPage = () => {
                     </strong>
                   </p>
                   <p className={styles.line}>
-                    <strong>Specialite :</strong>{' '}
-                    {appointment.practitioner.specialty || 'Non renseignee'}
+                    <strong>Spécialité :</strong>{' '}
+                    {appointment.practitioner.specialty || 'Non renseignée'}
                   </p>
                   <p className={styles.line}>
                     <strong>Type de rendez-vous :</strong> {appointment.appointmentTypeLabel}
@@ -275,7 +275,7 @@ const MesRendezVousPage = () => {
                     <strong>Date :</strong> {formatDateFr(appointment.appointmentDate)}
                   </p>
                   <p className={styles.line}>
-                    <strong>Creneau :</strong> {normalizeTime(appointment.startTime)} -{' '}
+                    <strong>Créneau :</strong> {normalizeTime(appointment.startTime)} -{' '}
                     {normalizeTime(appointment.endTime)}
                   </p>
                 </article>

@@ -63,7 +63,7 @@ const InscriptionPage = () => {
         return;
       }
 
-      setSuccessMessage(payload?.message || 'Inscription reussie.');
+      setSuccessMessage(payload?.message || 'Inscription réussie.');
       setLastName('');
       setFirstName('');
       setEmail('');
@@ -74,7 +74,7 @@ const InscriptionPage = () => {
       setPasswordMismatch(false);
       navigate('/connexion');
     } catch (error) {
-      console.error("Erreur reseau pendant l'inscription:", error);
+      console.error("Erreur réseau pendant l'inscription:", error);
       setErrorMessage('Impossible de joindre le serveur.');
     } finally {
       setIsSubmitting(false);
@@ -197,7 +197,7 @@ const InscriptionPage = () => {
               />
               <span className={styles.checkMark} aria-hidden="true" />
               <span className={styles.checkText}>
-                J&apos;accepte les conditions d&apos;utilisation
+                J'accepte les conditions d'utilisation
               </span>
             </label>
 

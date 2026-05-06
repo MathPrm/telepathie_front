@@ -334,13 +334,13 @@ const PractitionerPublicPage = () => {
     const authUser = getAuthUser();
     if (!authUser) {
       setBookingSuccessMessage('');
-      setBookingErrorMessage('Connectez-vous pour reserver un rendez-vous.');
+      setBookingErrorMessage('Connectez-vous pour réserver un rendez-vous.');
       return;
     }
 
     if (authUser.role !== 'patient') {
       setBookingSuccessMessage('');
-      setBookingErrorMessage('Seuls les utilisateurs patients peuvent reserver.');
+      setBookingErrorMessage('Seuls les utilisateurs patients peuvent réserver.');
       return;
     }
 
@@ -349,7 +349,7 @@ const PractitionerPublicPage = () => {
 
     if (!appointmentDate || !startTime || !endTime) {
       setBookingSuccessMessage('');
-      setBookingErrorMessage('Le creneau selectionne est invalide.');
+      setBookingErrorMessage('Le créneau sélectionné est invalide.');
       return;
     }
 
@@ -380,15 +380,15 @@ const PractitionerPublicPage = () => {
         | null;
 
       if (!response.ok) {
-        setBookingErrorMessage(payload?.message ?? 'Impossible de reserver ce creneau.');
+        setBookingErrorMessage(payload?.message ?? 'Impossible de reserver ce créneau.');
         return;
       }
 
       setSelectedSlotKey('');
-      setBookingSuccessMessage('Rendez-vous reserve avec succes.');
+      setBookingSuccessMessage('Rendez-vous réservé avec succès.');
       navigate('/mes-rendez-vous');
     } catch (error) {
-      console.error('Erreur reservation rendez-vous:', error);
+      console.error('Erreur réservation rendez-vous:', error);
       setBookingErrorMessage('Impossible de joindre le serveur.');
     } finally {
       setIsBooking(false);
@@ -536,7 +536,7 @@ const PractitionerPublicPage = () => {
           }}
           disabled={isBooking}
         >
-          <span>{isBooking ? 'Reservation...' : 'Reserver'}</span>
+          <span>{isBooking ? 'Réservation...' : 'Réserver'}</span>
           <ArrowRight size={16} />
         </button>
       )}

@@ -50,7 +50,7 @@ const ConnexionPage = () => {
         return;
       }
 
-      setSuccessMessage(payload?.message || 'Connexion reussie.');
+      setSuccessMessage(payload?.message || 'Connexion réussie.');
       if (payload?.user) {
         setAuthUser(payload.user);
         if (payload.user.role === 'practitioner') {
@@ -60,7 +60,7 @@ const ConnexionPage = () => {
       }
       navigate('/');
     } catch (error) {
-      console.error('Erreur reseau pendant la connexion:', error);
+      console.error('Erreur réseau pendant la connexion:', error);
       setErrorMessage('Impossible de joindre le serveur.');
     } finally {
       setIsSubmitting(false);

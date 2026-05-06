@@ -43,7 +43,7 @@ const PractitionerSearchResultsPage = () => {
           | null;
 
         if (!response.ok) {
-          setErrorMessage(payload?.message || 'Impossible de charger les resultats.');
+          setErrorMessage(payload?.message || 'Impossible de charger les résultats.');
           setResults([]);
           return;
         }
@@ -65,7 +65,7 @@ const PractitionerSearchResultsPage = () => {
     navigate(`/praticiens/resultats?q=${encodeURIComponent(nextQuery)}`);
   };
 
-  const resultLabel = results.length > 1 ? 'resultats' : 'resultat';
+  const resultLabel = results.length > 1 ? 'résultats' : 'résultat';
 
   return (
     <div className={styles.page}>
@@ -89,7 +89,7 @@ const PractitionerSearchResultsPage = () => {
                     {practitioner.firstName} {practitioner.lastName.toUpperCase()}
                   </h2>
                   <p className={styles.specialty}>
-                    {practitioner.specialty || 'Specialite non renseignee'}
+                    {practitioner.specialty || 'Spécialité non renseignée'}
                   </p>
 
                   <div className={styles.appointmentList}>
@@ -104,7 +104,7 @@ const PractitionerSearchResultsPage = () => {
                       ))
                     ) : (
                       <p className={styles.emptyAppointments}>
-                        Aucun type de rendez-vous renseigne.
+                        Aucun type de rendez-vous renseigné.
                       </p>
                     )}
                   </div>
@@ -118,7 +118,7 @@ const PractitionerSearchResultsPage = () => {
                       )
                     }
                   >
-                    Voir les disponibilites
+                    Voir les disponibilités
                   </button>
                 </article>
               ))}
