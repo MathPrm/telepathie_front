@@ -4,6 +4,8 @@
 }
 
 .main {
+  min-height: calc(100svh - 69px);
+  box-sizing: border-box;
   padding: 24px;
 }
 

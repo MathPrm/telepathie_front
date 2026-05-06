@@ -65,6 +65,35 @@
   gap: 10px;
 }
 
+.authActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.appointmentsLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #05066d;
+  padding: 0;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  transition: opacity 0.18s ease;
+}
+
+.appointmentsLink:hover {
+  opacity: 0.92;
+}
+
+.appointmentsLink:focus-visible {
+  outline: 3px solid rgba(5, 6, 109, 0.22);
+  outline-offset: 2px;
+}
+
 .signupButton {
   display: inline-flex;
   align-items: center;
@@ -209,9 +238,17 @@
     gap: 8px;
   }
 
+  .authActions {
+    gap: 8px;
+  }
+
   .userButton {
     padding: 10px 12px;
     font-size: 0.85rem;
+  }
+
+  .appointmentsLink {
+    font-size: 0.84rem;
   }
 
   .signupButton,

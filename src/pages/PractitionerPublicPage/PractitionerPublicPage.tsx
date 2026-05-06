@@ -1,6 +1,7 @@
 import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import Footer from '../../components/Footer';
 import PublicNavbar from '../../components/PublicNavbar';
 import { getAuthUser } from '../../utils/auth';
 import styles from './PractitionerPublicPage.module.css';
@@ -26,6 +27,11 @@ interface PractitionerPublicProfile {
   specialty: string;
   appointmentTypes: AppointmentType[];
   weeklySchedule: DaySchedule[];
+  bookedAppointments: Array<{
+    appointmentDate: string;
+    startTime: string;
+    endTime: string;
+  }>;
 }
 
 interface DaySlots {
@@ -61,7 +67,7 @@ const DAYS_PER_PAGE = 5;
 const SEARCH_HORIZON_DAYS = 120;
 
 const toMinutes = (value: string): number => {
-  const [h, m] = value.split(':').map(Number);
+  const [h, m] = value.slice(0, 5).split(':').map(Number);
   return h * 60 + m;
 };
 
@@ -80,7 +86,10 @@ const toLocalIsoDate = (date: Date): string => {
   return `${y}-${m}-${d}`;
 };
 
-const buildSlotsForDay = (row: DaySchedule, durationMinutes: number): string[] => {
+const buildSlotsForDay = (
+  row: DaySchedule,
+  durationMinutes: number,
+): Array<{ startMinutes: number; endMinutes: number; label: string }> => {
   if (
     !row.startTime ||
     !row.endTime ||
@@ -99,7 +108,7 @@ const buildSlotsForDay = (row: DaySchedule, durationMinutes: number): string[] =
 
   const breakStart = row.breakStart ? toMinutes(row.breakStart) : null;
   const breakEnd = row.breakEnd ? toMinutes(row.breakEnd) : null;
-  const slots: string[] = [];
+  const slots: Array<{ startMinutes: number; endMinutes: number; label: string }> = [];
 
   for (let cursor = start; cursor + durationMinutes <= end; cursor += durationMinutes) {
     const slotEnd = cursor + durationMinutes;
@@ -110,7 +119,11 @@ const buildSlotsForDay = (row: DaySchedule, durationMinutes: number): string[] =
       slotEnd > breakStart;
 
     if (!overlapsBreak) {
-      slots.push(`${toTime(cursor)} - ${toTime(slotEnd)}`);
+      slots.push({
+        startMinutes: cursor,
+        endMinutes: slotEnd,
+        label: `${toTime(cursor)} - ${toTime(slotEnd)}`,
+      });
     }
   }
 
@@ -216,6 +229,26 @@ const PractitionerPublicPage = () => {
     const now = new Date();
     const todayIso = toLocalIsoDate(now);
     const nowMinutes = now.getHours() * 60 + now.getMinutes();
+    const bookedByDate = new Map<
+      string,
+      Array<{ startMinutes: number; endMinutes: number }>
+    >();
+
+    for (const booked of profile.bookedAppointments ?? []) {
+      const dateKey = booked.appointmentDate;
+      const startMinutes = toMinutes(booked.startTime);
+      const endMinutes = toMinutes(booked.endTime);
+      if (Number.isNaN(startMinutes) || Number.isNaN(endMinutes) || startMinutes >= endMinutes) {
+        continue;
+      }
+
+      const existing = bookedByDate.get(dateKey);
+      if (existing) {
+        existing.push({ startMinutes, endMinutes });
+      } else {
+        bookedByDate.set(dateKey, [{ startMinutes, endMinutes }]);
+      }
+    }
 
     const result: DaySlots[] = [];
 
@@ -231,15 +264,20 @@ const PractitionerPublicPage = () => {
 
       const rawSlots = buildSlotsForDay(row, selectedType.durationMinutes);
       const isoDate = toLocalIsoDate(currentDate);
+      const reservedSlots = bookedByDate.get(isoDate) ?? [];
       const slots = rawSlots
-        .map((slot) => {
-          const start = slot.split(' - ')[0];
-          return {
-            key: `${isoDate}|${slot}`,
-            label: slot,
-            startMinutes: toMinutes(start),
-          };
+        .filter((slot) => {
+          return !reservedSlots.some(
+            (reserved) =>
+              slot.startMinutes < reserved.endMinutes &&
+              slot.endMinutes > reserved.startMinutes,
+          );
         })
+        .map((slot) => ({
+          key: `${isoDate}|${slot.label}`,
+          label: slot.label,
+          startMinutes: slot.startMinutes,
+        }))
         .filter((slot) =>
           isoDate === todayIso ? slot.startMinutes > nowMinutes : true,
         )
@@ -348,6 +386,7 @@ const PractitionerPublicPage = () => {
 
       setSelectedSlotKey('');
       setBookingSuccessMessage('Rendez-vous reserve avec succes.');
+      navigate('/mes-rendez-vous');
     } catch (error) {
       console.error('Erreur reservation rendez-vous:', error);
       setBookingErrorMessage('Impossible de joindre le serveur.');
@@ -487,6 +526,7 @@ const PractitionerPublicPage = () => {
           )}
         </section>
       </main>
+      <Footer />
       {selectedSlotKey && (
         <button
           type="button"
@@ -496,7 +536,7 @@ const PractitionerPublicPage = () => {
           }}
           disabled={isBooking}
         >
-          <span>Réserver</span>
+          <span>{isBooking ? 'Reservation...' : 'Reserver'}</span>
           <ArrowRight size={16} />
         </button>
       )}

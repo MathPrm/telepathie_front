@@ -1,0 +1,159 @@
+.page {
+  min-height: 100svh;
+  background: #b0c5ff;
+}
+
+.main {
+  min-height: calc(100svh - 69px);
+  box-sizing: border-box;
+  padding: 24px;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid rgba(5, 6, 109, 0.14);
+  border-radius: 18px;
+  box-shadow: 0 12px 26px rgba(5, 6, 109, 0.12);
+  padding: 24px;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.title {
+  margin: 0;
+  color: #05066d;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  line-height: 1.1;
+  font-weight: 800;
+}
+
+.filterWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filterLabel {
+  color: #05066d;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.filterSelect {
+  border: 1px solid rgba(5, 6, 109, 0.3);
+  border-radius: 10px;
+  background: #ffffff;
+  color: #05066d;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  outline: none;
+}
+
+.filterSelect:focus {
+  border-color: #05066d;
+  box-shadow: 0 0 0 3px rgba(5, 6, 109, 0.12);
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  color: #05066d;
+  font-size: 1rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.list {
+  margin-top: 20px;
+}
+
+.item {
+  position: relative;
+  padding: 14px 0;
+}
+
+.item + .item {
+  border-top: 1.5px solid #05076d8e;
+}
+
+.line {
+  margin: 6px 0;
+  color: #05066d;
+  font-size: 0.95rem;
+}
+
+.practitionerName {
+  font-size: 1.22rem;
+  line-height: 1.2;
+}
+
+.itemCancelled .line {
+  color: #7a1f1f;
+}
+
+.itemPast .line {
+  color: #424650;
+}
+
+.cancelButton {
+  position: absolute;
+  top: 14px;
+  right: 0;
+  border: 1px solid #05066d;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #05066d;
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.cancelButton:hover {
+  opacity: 0.9;
+}
+
+.cancelButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.infoText {
+  margin: 10px 0 0;
+  color: #05066d;
+  font-size: 0.92rem;
+}
+
+.errorText {
+  margin: 10px 0 0;
+  color: #a50000;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .main {
+    padding: 16px;
+  }
+
+  .container {
+    padding: 16px;
+  }
+
+  .cancelButton {
+    position: static;
+    margin-bottom: 10px;
+  }
+
+  .headerRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

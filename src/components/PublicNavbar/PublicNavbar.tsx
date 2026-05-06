@@ -1,4 +1,4 @@
-import { UserRound } from 'lucide-react';
+import { CalendarDays, UserRound } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import type { FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -89,36 +89,45 @@ const PublicNavbar: FC<PublicNavbarProps> = ({
         </Link>
 
         {authUser ? (
-          <div className={styles.userMenu} ref={menuRef}>
-            <button
-              type="button"
-              className={styles.userButton}
-              onClick={() => setIsMenuOpen((current) => !current)}
-              aria-expanded={isMenuOpen}
-              aria-haspopup="menu"
-            >
-              <UserRound size={18} />
-              <span>{userDisplayName}</span>
-            </button>
-
-            {isMenuOpen && (
-              <div className={styles.dropdown} role="menu">
-                <button
-                  type="button"
-                  className={styles.dropdownItem}
-                  onClick={handleGoProfile}
-                >
-                  Profil
-                </button>
-                <button
-                  type="button"
-                  className={styles.dropdownItem}
-                  onClick={handleLogout}
-                >
-                  Déconnexion
-                </button>
-              </div>
+          <div className={styles.authActions}>
+            {authUser.role === 'patient' && (
+              <Link to="/mes-rendez-vous" className={styles.appointmentsLink}>
+                <CalendarDays size={16} />
+                Mes RDV
+              </Link>
             )}
+
+            <div className={styles.userMenu} ref={menuRef}>
+              <button
+                type="button"
+                className={styles.userButton}
+                onClick={() => setIsMenuOpen((current) => !current)}
+                aria-expanded={isMenuOpen}
+                aria-haspopup="menu"
+              >
+                <UserRound size={18} />
+                <span>{userDisplayName}</span>
+              </button>
+
+              {isMenuOpen && (
+                <div className={styles.dropdown} role="menu">
+                  <button
+                    type="button"
+                    className={styles.dropdownItem}
+                    onClick={handleGoProfile}
+                  >
+                    Profil
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.dropdownItem}
+                    onClick={handleLogout}
+                  >
+                    Déconnexion
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         ) : (
           <div className={styles.actions}>
