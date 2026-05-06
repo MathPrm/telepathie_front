@@ -3,6 +3,7 @@ export interface AuthUser {
   firstName: string;
   lastName: string;
   email: string;
+  role: 'patient' | 'practitioner';
   createdAt: string;
 }
 
@@ -15,7 +16,27 @@ export const getAuthUser = (): AuthUser | null => {
   }
 
   try {
-    return JSON.parse(raw) as AuthUser;
+    const parsed = JSON.parse(raw) as Partial<AuthUser>;
+
+    if (
+      typeof parsed.id !== 'number' ||
+      typeof parsed.firstName !== 'string' ||
+      typeof parsed.lastName !== 'string' ||
+      typeof parsed.email !== 'string' ||
+      typeof parsed.createdAt !== 'string'
+    ) {
+      localStorage.removeItem(AUTH_USER_KEY);
+      return null;
+    }
+
+    return {
+      id: parsed.id,
+      firstName: parsed.firstName,
+      lastName: parsed.lastName,
+      email: parsed.email,
+      role: parsed.role === 'practitioner' ? 'practitioner' : 'patient',
+      createdAt: parsed.createdAt,
+    };
   } catch {
     localStorage.removeItem(AUTH_USER_KEY);
     return null;

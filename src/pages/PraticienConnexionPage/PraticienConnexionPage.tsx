@@ -1,11 +1,12 @@
+import { ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import type { FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PublicNavbar from '../../components/PublicNavbar';
 import { setAuthUser } from '../../utils/auth';
-import styles from './ConnexionPage.module.css';
+import styles from './PraticienConnexionPage.module.css';
 
-const ConnexionPage = () => {
+const PraticienConnexionPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,7 +29,11 @@ const ConnexionPage = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({
+          email,
+          password,
+          expectedRole: 'practitioner',
+        }),
       });
 
       const payload = (await response.json().catch(() => null)) as
@@ -50,13 +55,13 @@ const ConnexionPage = () => {
         return;
       }
 
-      setSuccessMessage(payload?.message || 'Connexion reussie.');
+      setSuccessMessage(payload?.message || 'Connexion réussie.');
       if (payload?.user) {
         setAuthUser(payload.user);
       }
       navigate('/');
     } catch (error) {
-      console.error('Erreur reseau pendant la connexion:', error);
+      console.error('Erreur réseau pendant la connexion praticien:', error);
       setErrorMessage('Impossible de joindre le serveur.');
     } finally {
       setIsSubmitting(false);
@@ -67,13 +72,11 @@ const ConnexionPage = () => {
     <div className={styles.page}>
       <PublicNavbar />
       <main className={styles.main}>
-        <section className={styles.card} aria-labelledby="login-title">
-          <h1 id="login-title" className={styles.title}>
-            Connexion
+        <section className={styles.card} aria-labelledby="praticien-login-title">
+          <h1 id="praticien-login-title" className={styles.title}>
+            Espace praticiens
           </h1>
-          <p className={styles.subtitle}>
-            Connectez-vous à votre espace Télépathie.
-          </p>
+          <p className={styles.subtitle}>Connectez-vous à votre espace dédié.</p>
 
           <form className={styles.form} onSubmit={handleSubmit}>
             <label className={styles.field} htmlFor="email">
@@ -127,6 +130,14 @@ const ConnexionPage = () => {
             >
               {isSubmitting ? 'Connexion...' : 'Se connecter'}
             </button>
+
+            <Link
+              to="/praticiens/inscription"
+              className={styles.praticienSignupLink}
+            >
+              <span>Inscription praticien</span>
+              <ArrowRight size={16} />
+            </Link>
           </form>
         </section>
       </main>
@@ -134,4 +145,4 @@ const ConnexionPage = () => {
   );
 };
 
-export default ConnexionPage;
+export default PraticienConnexionPage;
