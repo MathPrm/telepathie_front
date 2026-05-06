@@ -3,16 +3,16 @@ import styles from './Footer.module.css';
 
 const Footer = () => {
   const legalLinks = [
-    'Mentions legales',
-    'Politique de confidentialite',
+    'Mentions légales',
+    'Politique de confidentialité',
     "Conditions d'utilisation",
-    'Accessibilite',
+    'Accessibilité',
   ];
-  const supportLinks = ['Centre d aide', 'FAQ', 'Contact', 'Statut du service'];
+  const supportLinks = ['Centre d\'aide', 'FAQ', 'Contact', 'Statut du service'];
   const productLinks = [
     { label: 'Prendre un RDV', to: '#' },
     { label: 'Rejoindre une visio', to: '#' },
-    { label: 'Nos specialites', to: '#' },
+    { label: 'Nos spécialités', to: '#' },
     { label: 'Espace praticiens', to: '/praticiens/connexion' },
   ];
 
@@ -20,13 +20,13 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.brandBlock}>
-          <h2 className={styles.brandTitle}>Telepathie</h2>
-          <p className={styles.brandText}>La medecine qui vous devine.</p>
+          <h2 className={styles.brandTitle}>Télépathie</h2>
+          <p className={styles.brandText}>La médecine qui vous devine.</p>
         </div>
 
         <div className={styles.linksGrid}>
           <div>
-            <h3 className={styles.groupTitle}>Legal</h3>
+            <h3 className={styles.groupTitle}>Légal</h3>
             <ul className={styles.list}>
               {legalLinks.map((item) => (
                 <li key={item}>
@@ -73,7 +73,7 @@ const Footer = () => {
       </div>
 
       <div className={styles.bottomBar}>
-        <p>© {new Date().getFullYear()} Telepathie - Tous droits reserves</p>
+        <p>© {new Date().getFullYear()} Télépathie - Tous droits réservés</p>
       </div>
     </footer>
   );
