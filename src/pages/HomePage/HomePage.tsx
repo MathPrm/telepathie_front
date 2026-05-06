@@ -1,3 +1,4 @@
+import Footer from '../../components/Footer';
 import PublicNavbar from '../../components/PublicNavbar';
 import styles from './HomePage.module.css';
 
@@ -19,6 +20,7 @@ const HomePage = () => {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 };
