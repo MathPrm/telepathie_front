@@ -10,9 +10,9 @@ const Footer = () => {
   ];
   const supportLinks = ['Centre d\'aide', 'FAQ', 'Contact', 'Statut du service'];
   const productLinks = [
-    { label: 'Prendre un RDV', to: '#' },
+    { label: 'Prendre un RDV', to: '/praticiens/recherche' },
     { label: 'Rejoindre une visio', to: '#' },
-    { label: 'Nos spécialités', to: '#' },
+    { label: 'Nos spécialités', to: '/praticiens/recherche' },
     { label: 'Espace praticiens', to: '/praticiens/connexion' },
   ];
 

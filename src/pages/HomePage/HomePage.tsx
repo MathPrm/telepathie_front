@@ -7,6 +7,10 @@ import styles from './HomePage.module.css';
 const HomePage = () => {
   const navigate = useNavigate();
 
+  const handleBookAppointment = (): void => {
+    navigate('/praticiens/recherche');
+  };
+
   const handleProtectedAction = (): void => {
     const user = getAuthUser();
 
@@ -29,7 +33,7 @@ const HomePage = () => {
             <button
               type="button"
               className={styles.primaryButton}
-              onClick={handleProtectedAction}
+              onClick={handleBookAppointment}
             >
               Prendre un RDV
             </button>

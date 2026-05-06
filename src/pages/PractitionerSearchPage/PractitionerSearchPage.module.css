@@ -1,0 +1,41 @@
+.page {
+  min-height: 100svh;
+  background: #b0c5ff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  min-height: calc(100svh - 69px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.hero {
+  width: 100%;
+  max-width: 820px;
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  color: #05066d;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  line-height: 1.05;
+  font-weight: 800;
+}
+
+.subtitle {
+  margin: 14px 0 0;
+  color: #05066d;
+  font-size: 1.15rem;
+  opacity: 0.9;
+}
+
+.searchBox {
+  margin: 30px auto 0;
+  max-width: 720px;
+}
