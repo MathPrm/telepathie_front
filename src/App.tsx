@@ -1,16 +1,15 @@
-// src/App.tsx
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ConnexionPage from './pages/ConnexionPage';
 import HomePage from './pages/HomePage';
+import InscriptionPage from './pages/InscriptionPage';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* On associe l'URL "/" à notre Smart Component */}
         <Route path="/" element={<HomePage />} />
-        
-        {/* Exemple pour plus tard : */}
-        {/* <Route path="/consultation" element={<ConsultationPage />} /> */}
+        <Route path="/connexion" element={<ConnexionPage />} />
+        <Route path="/inscription" element={<InscriptionPage />} />
       </Routes>
     </BrowserRouter>
   );
